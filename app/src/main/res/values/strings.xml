@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">China</string>
+
+
+    <string name="datosVendedor">Datos del vendedor</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tituloCargarProducto">Nuevo producto</string>
+    <string name="hintTituloProducto">Nombre del  Producto</string>
+
+</resources>

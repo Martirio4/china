@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="tamañoTitulos">20sp</dimen>
+    <dimen name="anchoFotoCargarProducto">300dp</dimen>
+    <dimen name="altoFotoCargarProducto">200dp</dimen>
+    <dimen name="margenChico">12dp</dimen>
+
+    <dimen name="altoTarjetaCargarProducto">230dp</dimen>
+    <dimen name="altoFrameLayout">240dp</dimen>
+    <dimen name="anchoTarjetaCargarProducto">308dp</dimen>
+    <dimen name="elevacionTarjetaCargaProducto">10dp</dimen>
+</resources>
