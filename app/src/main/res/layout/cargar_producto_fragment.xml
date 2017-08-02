@@ -79,6 +79,59 @@
             android:textColorHint="@color/textoOscuro"
             android:layout_height="wrap_content" />
     </android.support.design.widget.TextInputLayout>
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_marginLeft="@dimen/margenChico"
+            android:layout_marginRight="@dimen/margenChico"
+            android:layout_width="0dp"
+            android:layout_weight="50"
+            android:layout_height="wrap_content">
+            <EditText
+                android:textColor="@color/textoOscuro"
+                android:hint="@string/hintAncho"
+                android:layout_width="match_parent"
+                android:textColorHighlight="@color/textoOscuro"
+                android:textColorHint="@color/textoOscuro"
+                android:layout_height="wrap_content" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_marginLeft="@dimen/margenChico"
+            android:layout_marginRight="@dimen/margenChico"
+            android:layout_width="0dp"
+            android:layout_weight="50"
+            android:layout_height="wrap_content">
+            <EditText
+                android:textColor="@color/textoOscuro"
+                android:hint="@string/hintAlto"
+                android:layout_width="match_parent"
+                android:textColorHighlight="@color/textoOscuro"
+                android:textColorHint="@color/textoOscuro"
+                android:layout_height="wrap_content" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_marginLeft="@dimen/margenChico"
+            android:layout_marginRight="@dimen/margenChico"
+            android:layout_width="0dp"
+            android:layout_weight="50"
+            android:layout_height="wrap_content">
+            <EditText
+                android:textColor="@color/textoOscuro"
+                android:hint="@string/hintProfuncidad"
+                android:layout_width="match_parent"
+                android:textColorHighlight="@color/textoOscuro"
+                android:textColorHint="@color/textoOscuro"
+                android:layout_height="wrap_content" />
+        </android.support.design.widget.TextInputLayout>
+
+    </LinearLayout>
     <android.support.design.widget.TextInputLayout
         android:layout_marginLeft="@dimen/margenChico"
         android:layout_marginRight="@dimen/margenChico"
@@ -86,11 +139,63 @@
         android:layout_height="wrap_content">
         <EditText
             android:textColor="@color/textoOscuro"
-            android:hint="@string/hintTituloProducto"
+            android:hint="@string/hintCantidadBulto"
             android:layout_width="match_parent"
             android:textColorHighlight="@color/textoOscuro"
             android:textColorHint="@color/textoOscuro"
             android:layout_height="wrap_content" />
     </android.support.design.widget.TextInputLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_marginLeft="@dimen/margenChico"
+            android:layout_marginRight="@dimen/margenChico"
+            android:layout_width="0dp"
+            android:layout_weight="50"
+            android:layout_height="wrap_content">
+            <EditText
+                android:textColor="@color/textoOscuro"
+                android:hint="@string/hintPrecioUnitario"
+                android:layout_width="match_parent"
+                android:textColorHighlight="@color/textoOscuro"
+                android:textColorHint="@color/textoOscuro"
+                android:layout_height="wrap_content" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_marginLeft="@dimen/margenChico"
+            android:layout_marginRight="@dimen/margenChico"
+            android:layout_width="0dp"
+            android:layout_weight="50"
+            android:layout_height="wrap_content">
+            <EditText
+                android:textColor="@color/textoOscuro"
+                android:hint="@string/hintPrecioBulto"
+                android:layout_width="match_parent"
+                android:textColorHighlight="@color/textoOscuro"
+                android:textColorHint="@color/textoOscuro"
+                android:layout_height="wrap_content" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_marginLeft="@dimen/margenChico"
+            android:layout_marginRight="@dimen/margenChico"
+            android:layout_width="0dp"
+            android:layout_weight="50"
+            android:layout_height="wrap_content">
+            <EditText
+                android:textColor="@color/textoOscuro"
+                android:hint="@string/hintMoneda"
+                android:layout_width="match_parent"
+                android:textColorHighlight="@color/textoOscuro"
+                android:textColorHint="@color/textoOscuro"
+                android:layout_height="wrap_content" />
+        </android.support.design.widget.TextInputLayout>
+
+    </LinearLayout>
 
 </LinearLayout>
