@@ -8,71 +8,20 @@
     android:layout_height="match_parent"
     tools:context="com.martirio.china.Fragments.FragmentCargarProducto">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/boton"
-        android:textColor="@color/textoOscuro"
-        android:textSize="@dimen/tamañoTitulos"
-        android:textAlignment="center"
+
+    <android.support.design.widget.TextInputLayout
         android:layout_marginLeft="@dimen/margenChico"
         android:layout_marginRight="@dimen/margenChico"
-        android:layout_marginTop="12sp"
-        android:text="@string/tituloCargarProducto"/>
-
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_marginLeft="@dimen/margenChico"
-            android:layout_marginRight="@dimen/margenChico"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:textColor="@color/textoOscuro"
+            android:hint="@string/hintTituloProducto"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <EditText
-                android:textColor="@color/textoOscuro"
-                android:hint="@string/hintTituloProducto"
-                android:layout_width="match_parent"
-                android:textColorHighlight="@color/textoOscuro"
-                android:textColorHint="@color/textoOscuro"
-                android:layout_height="wrap_content" />
-        </android.support.design.widget.TextInputLayout>
-
-<FrameLayout
-    android:layout_gravity="center_horizontal"
-    android:layout_width="match_parent"
-    android:padding="8dp"
-    android:layout_height="@dimen/altoFrameLayout">
-    <android.support.v7.widget.CardView
-        android:layout_gravity="center"
-        android:elevation="@dimen/elevacionTarjetaCargaProducto"
-        android:layout_width="@dimen/anchoTarjetaCargarProducto"
-        android:layout_height="@dimen/altoTarjetaCargarProducto">
-        <ImageView
-            android:layout_gravity="center_horizontal"
-            android:scaleType="centerCrop"
-            android:layout_marginTop="4dp"
-            android:background="@color/fondoOscuro"
-            android:id="@+id/imagenProducto"
-            android:layout_width="@dimen/anchoFotoCargarProducto"
-            android:layout_height="@dimen/altoFotoCargarProducto" />
-
-        <com.github.clans.fab.FloatingActionButton
-            android:layout_width="wrap_content"
-            android:layout_margin="@dimen/margenChico"
-            android:layout_gravity="bottom|right"
-            android:layout_height="wrap_content"
-            android:id="@+id/fabImagen"/>
-
-    </android.support.v7.widget.CardView>
-
-
-</FrameLayout>
-    <ImageView
-        android:layout_gravity="center_horizontal"
-        android:scaleType="centerCrop"
-        android:layout_marginTop="4dp"
-        android:background="@color/fondoOscuro"
-        android:id="@+id/imagenProducto2"
-        android:layout_width="@dimen/anchoFotoCargarProducto"
-        android:layout_height="@dimen/altoFotoCargarProducto" />
+            android:textColorHighlight="@color/textoOscuro"
+            android:textColorHint="@color/textoOscuro"
+            android:layout_height="wrap_content" />
+    </android.support.design.widget.TextInputLayout>
 
 
     <android.support.design.widget.CoordinatorLayout
@@ -80,5 +29,68 @@
         android:layout_height="wrap_content">
 
     </android.support.design.widget.CoordinatorLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/altoFrameLayout"
+        android:layout_gravity="center_horizontal"
+        android:padding="8dp">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="@dimen/anchoTarjetaCargarProducto"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:elevation="@dimen/elevacionTarjetaCargaProducto">
+
+                <ImageView
+                    android:id="@+id/imagenProducto"
+                    android:layout_width="@dimen/anchoFotoCargarProducto"
+                    android:layout_height="@dimen/altoFotoCargarProducto"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="4dp"
+                    android:background="@color/fondoOscuro"
+                    android:scaleType="centerCrop" />
+
+
+
+
+
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/fabImagen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|right"
+                android:layout_margin="@dimen/margenChico" />
+
+        </android.support.v7.widget.CardView>
+
+
+    </FrameLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_marginLeft="@dimen/margenChico"
+        android:layout_marginRight="@dimen/margenChico"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:textColor="@color/textoOscuro"
+            android:hint="@string/hintDescripcion"
+            android:layout_width="match_parent"
+            android:textColorHighlight="@color/textoOscuro"
+            android:textColorHint="@color/textoOscuro"
+            android:layout_height="wrap_content" />
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_marginLeft="@dimen/margenChico"
+        android:layout_marginRight="@dimen/margenChico"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:textColor="@color/textoOscuro"
+            android:hint="@string/hintTituloProducto"
+            android:layout_width="match_parent"
+            android:textColorHighlight="@color/textoOscuro"
+            android:textColorHint="@color/textoOscuro"
+            android:layout_height="wrap_content" />
+    </android.support.design.widget.TextInputLayout>
 
 </LinearLayout>

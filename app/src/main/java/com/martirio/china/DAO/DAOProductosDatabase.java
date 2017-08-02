@@ -19,6 +19,7 @@ public class DAOProductosDatabase extends DatabaseHelper {
 
    public static final String NOMBREPRODUCTO = "NOMBREPRODUCTO";
    public static final String DESCRIPCION = "DESCRIPCION";
+   public static final String IDVENDEDOR = "IDVENDEDOR";
    public static final String PESOBULTO= "PESOBULTO";
    public static final String CANTIDADBULTO = "CANTIDADBULTO";
    public static final String PRECIOBULTO = "PRECIOBULTO";
@@ -34,7 +35,7 @@ public class DAOProductosDatabase extends DatabaseHelper {
         super(context);
     }
 
-    public void addFormato (Producto unProducto, String tipoFormato){
+    public void agregarProducto(Producto unProducto, String tipoFormato){
 
         if(!checkIfExist(unProducto.getIdProducto())) {
 
@@ -61,103 +62,53 @@ public class DAOProductosDatabase extends DatabaseHelper {
         }
     }
 
-    public void addFormatos(List<Producto> formatosList,String tipoFormato){
+    public void addProductosVarios(List<Producto> formatosList,String tipoFormato){
 
         for(Producto unProducto : formatosList){
-            addFormato(unProducto, tipoFormato);
+            agregarProducto(unProducto, tipoFormato);
         }
     }
 
 
-    public List<Producto> getAllFormatosPorTipo(String tipoFormato){
+    public List<Producto> getAllFormatosPorVendedor(String idVendedor){
 
-        List<Producto> formatos  = new ArrayList<>();
+        List<Producto> listaProductosPorVendedor  = new ArrayList<>();
         SQLiteDatabase database = getReadableDatabase();
-        String select = "SELECT * FROM " + TABLE_FORMATOS+" WHERE TIPO_FORMATO = '"+tipoFormato+"'";
+        String select = "SELECT * FROM " + TABLE_PRODUCTOS+" WHERE IDVENDEDOR = '"+idVendedor+"'";
 
         Cursor cursor = database.rawQuery(select, null);
         while(cursor.moveToNext()){
 
             //LEER CADA FILA DE LA TABLA RESULTADO
             Producto unProducto = new Producto();
-            unProducto.setTitle(cursor.getString(cursor.getColumnIndex(TITLE)));
-            unProducto.setRelease_date(cursor.getString(cursor.getColumnIndex(RELEASE_DATE)));
-            unProducto.setOverview(cursor.getString(cursor.getColumnIndex(OVERVIEW)));
-            unProducto.setVote_average(cursor.getFloat(cursor.getColumnIndex(VOTE_AVERAGE)));
-            unProducto.setTipoFormato(cursor.getString(cursor.getColumnIndex(TIPO_FORMATO)));
-            unProducto.setPoster_path(cursor.getString(cursor.getColumnIndex(POSTER_PATH)));
-            unProducto.setId(cursor.getInt(cursor.getColumnIndex(ID)));
-            unProducto.setBackdrop_path(cursor.getString(cursor.getColumnIndex(BACKDROP_PATH)));
-            unProducto.setName(cursor.getString(cursor.getColumnIndex(NAME)));
-            unProducto.setFirst_air_date(cursor.getString(cursor.getColumnIndex(FIRST_AIR_DATE)));
-            unProducto.setTagline(cursor.getString(cursor.getColumnIndex(TAGLINE)));
-            unProducto.setNumber_of_seasons(cursor.getInt(cursor.getColumnIndex(NUMBER_OF_SEASONS)));
-            unProducto.setNumber_of_episodes(cursor.getInt(cursor.getColumnIndex(NUMBER_OF_EPISODES)));
-            unProducto.setBudget(cursor.getInt(cursor.getColumnIndex(BUDGET)));
-            unProducto.setRevenue(cursor.getInt(cursor.getColumnIndex(REVENUE)));
-            formatos.add(unProducto);
+            unProducto.setNombreProducto(cursor.getString(cursor.getColumnIndex(NOMBREPRODUCTO)));
+            unProducto.setDescripcion(cursor.getString(cursor.getColumnIndex(DESCRIPCION)));
+            unProducto.setDescripcion(cursor.getString(cursor.getColumnIndex(IDVENDEDOR)));
+            unProducto.setPesoBulto(cursor.getDouble(cursor.getColumnIndex(PESOBULTO)));
+            unProducto.setPrecioUnitario(cursor.getDouble(cursor.getColumnIndex(PRECIOUNITARIO)));
+            unProducto.setPrecioBulto(cursor.getDouble(cursor.getColumnIndex(PRECIOBULTO)));
+            unProducto.setCantidadBulto(cursor.getInt(cursor.getColumnIndex(CANTIDADBULTO)));
+            unProducto.setAltoBulto(cursor.getInt(cursor.getColumnIndex(ALTOBULTO)));
+            unProducto.setAnchoBulto(cursor.getInt(cursor.getColumnIndex(ANCHOBULTO)));
+            unProducto.setProfundidadBulto(cursor.getInt(cursor.getColumnIndex(PROFUNDIDADBULTO)));
+            unProducto.setIdProducto(cursor.getString(cursor.getColumnIndex(IDPRODUCTO)));
+            unProducto.setMonedaBulto(cursor.getString(cursor.getColumnIndex(MONEDABULTO)));
+            listaProductosPorVendedor.add(unProducto);
         }
         //CERRAR
         cursor.close();
         database.close();
 
-        return formatos;
+        return listaProductosPorVendedor;
     }
 
 
-    public List<Producto> getFormatosConFiltro(String queBuscoEnInet, String tipoFormato){
-        String select;
-
-        List<Producto> formatos  = new ArrayList<>();
-        SQLiteDatabase database = getReadableDatabase();
-
-        if (queBuscoEnInet==null ||queBuscoEnInet.startsWith("https://")) {
-            select = "SELECT * FROM " + TABLE_FORMATOS;
-        }
-        else{
-            select = "SELECT * FROM " + TABLE_FORMATOS+" WHERE NAME LIKE '%"+queBuscoEnInet+"%' AND TIPO_FORMATO LIKE "+"'%"+tipoFormato+"%'";
-        }
-
-        Cursor cursor = database.rawQuery(select, null);
-        while(cursor.moveToNext()){
-
-            //LEER CADA FILA DE LA TABLA RESULTADO
-            Producto unProducto = new Producto();
-            unProducto.setTitle(cursor.getString(cursor.getColumnIndex(TITLE)));
-            unProducto.setRelease_date(cursor.getString(cursor.getColumnIndex(RELEASE_DATE)));
-            unProducto.setOverview(cursor.getString(cursor.getColumnIndex(OVERVIEW)));
-            unProducto.setVote_average(cursor.getFloat(cursor.getColumnIndex(VOTE_AVERAGE)));
-            unProducto.setTipoFormato(cursor.getString(cursor.getColumnIndex(TIPO_FORMATO)));
-            unProducto.setPoster_path(cursor.getString(cursor.getColumnIndex(POSTER_PATH)));
-            unProducto.setId(cursor.getInt(cursor.getColumnIndex(ID)));
-            unProducto.setBackdrop_path(cursor.getString(cursor.getColumnIndex(BACKDROP_PATH)));
-            unProducto.setName(cursor.getString(cursor.getColumnIndex(NAME)));
-            unProducto.setFirst_air_date(cursor.getString(cursor.getColumnIndex(FIRST_AIR_DATE)));
-            unProducto.setTagline(cursor.getString(cursor.getColumnIndex(TAGLINE)));
-            unProducto.setNumber_of_seasons(cursor.getInt(cursor.getColumnIndex(NUMBER_OF_SEASONS)));
-            unProducto.setNumber_of_episodes(cursor.getInt(cursor.getColumnIndex(NUMBER_OF_EPISODES)));
-            unProducto.setBudget(cursor.getInt(cursor.getColumnIndex(BUDGET)));
-            unProducto.setRevenue(cursor.getInt(cursor.getColumnIndex(REVENUE)));
-            formatos.add(unProducto);
-        }
-
-        //CERRAR
-        cursor.close();
-        database.close();
-
-        return formatos;
-    }
-
-
-
-
-
-    public Producto getFormato(String idProducto){
+        public Producto getProducto(String idProducto){
 
         SQLiteDatabase database = getReadableDatabase();
 
         String query = "SELECT * FROM " + TABLE_PRODUCTOS +
-                        " WHERE ID=" + idProducto;
+                        " WHERE IDPRODUCTO=" + idProducto;
 
         Cursor cursor = database.rawQuery(query, null);
         Producto unProducto = null;
@@ -166,21 +117,19 @@ public class DAOProductosDatabase extends DatabaseHelper {
             //LEER CADA FILA DE LA TABLA RESULTADO
 
             unProducto = new Producto();
-            unProducto.setTitle(cursor.getString(cursor.getColumnIndex(TITLE)));
-            unProducto.setRelease_date(cursor.getString(cursor.getColumnIndex(RELEASE_DATE)));
-            unProducto.setOverview(cursor.getString(cursor.getColumnIndex(OVERVIEW)));
-            unProducto.setVote_average(cursor.getFloat(cursor.getColumnIndex(VOTE_AVERAGE)));
-            unProducto.setTipoFormato(cursor.getString(cursor.getColumnIndex(TIPO_FORMATO)));
-            unProducto.setPoster_path(cursor.getString(cursor.getColumnIndex(POSTER_PATH)));
-            unProducto.setId(cursor.getInt(cursor.getColumnIndex(ID)));
-            unProducto.setBackdrop_path(cursor.getString(cursor.getColumnIndex(BACKDROP_PATH)));
-            unProducto.setName(cursor.getString(cursor.getColumnIndex(NAME)));
-            unProducto.setFirst_air_date(cursor.getString(cursor.getColumnIndex(FIRST_AIR_DATE)));
-            unProducto.setTagline(cursor.getString(cursor.getColumnIndex(TAGLINE)));
-            unProducto.setNumber_of_seasons(cursor.getInt(cursor.getColumnIndex(NUMBER_OF_SEASONS)));
-            unProducto.setNumber_of_episodes(cursor.getInt(cursor.getColumnIndex(NUMBER_OF_EPISODES)));
-            unProducto.setBudget(cursor.getInt(cursor.getColumnIndex(BUDGET)));
-            unProducto.setRevenue(cursor.getInt(cursor.getColumnIndex(REVENUE)));
+            unProducto.setNombreProducto(cursor.getString(cursor.getColumnIndex(NOMBREPRODUCTO)));
+            unProducto.setDescripcion(cursor.getString(cursor.getColumnIndex(DESCRIPCION)));
+            unProducto.setDescripcion(cursor.getString(cursor.getColumnIndex(IDVENDEDOR)));
+            unProducto.setPesoBulto(cursor.getDouble(cursor.getColumnIndex(PESOBULTO)));
+            unProducto.setPrecioUnitario(cursor.getDouble(cursor.getColumnIndex(PRECIOUNITARIO)));
+            unProducto.setPrecioBulto(cursor.getDouble(cursor.getColumnIndex(PRECIOBULTO)));
+            unProducto.setCantidadBulto(cursor.getInt(cursor.getColumnIndex(CANTIDADBULTO)));
+            unProducto.setAltoBulto(cursor.getInt(cursor.getColumnIndex(ALTOBULTO)));
+            unProducto.setAnchoBulto(cursor.getInt(cursor.getColumnIndex(ANCHOBULTO)));
+            unProducto.setProfundidadBulto(cursor.getInt(cursor.getColumnIndex(PROFUNDIDADBULTO)));
+            unProducto.setIdProducto(cursor.getString(cursor.getColumnIndex(IDPRODUCTO)));
+            unProducto.setMonedaBulto(cursor.getString(cursor.getColumnIndex(MONEDABULTO)));
+
         }
 
         cursor.close();
@@ -190,180 +139,8 @@ public class DAOProductosDatabase extends DatabaseHelper {
     }
 
     public Boolean checkIfExist(String idProducto){
-        Producto unProducto = getFormato(idProducto);
+        Producto unProducto = getProducto(idProducto);
         return !(unProducto == null);
     }
 
-    public List<Producto> busquedaPorVotoPeliculas(){
-        String select;
-
-        List<Producto> formatos  = new ArrayList<>();
-        SQLiteDatabase database = getReadableDatabase();
-
-
-
-        select = "SELECT * FROM " + TABLE_FORMATOS+" WHERE TITLE IS NOT NULL ORDER BY VOTE_AVERAGE ASC";
-
-
-
-        Cursor cursor = database.rawQuery(select, null);
-        while(cursor.moveToNext()){
-
-            //LEER CADA FILA DE LA TABLA RESULTADO
-            Producto unProducto = new Producto();
-            unProducto.setTitle(cursor.getString(cursor.getColumnIndex(TITLE)));
-            unProducto.setRelease_date(cursor.getString(cursor.getColumnIndex(RELEASE_DATE)));
-            unProducto.setOverview(cursor.getString(cursor.getColumnIndex(OVERVIEW)));
-            unProducto.setVote_average(cursor.getFloat(cursor.getColumnIndex(VOTE_AVERAGE)));
-            unProducto.setTipoFormato(cursor.getString(cursor.getColumnIndex(TIPO_FORMATO)));
-            unProducto.setPoster_path(cursor.getString(cursor.getColumnIndex(POSTER_PATH)));
-            unProducto.setId(cursor.getInt(cursor.getColumnIndex(ID)));
-            unProducto.setBackdrop_path(cursor.getString(cursor.getColumnIndex(BACKDROP_PATH)));
-            unProducto.setName(cursor.getString(cursor.getColumnIndex(NAME)));
-            unProducto.setFirst_air_date(cursor.getString(cursor.getColumnIndex(FIRST_AIR_DATE)));
-            unProducto.setTagline(cursor.getString(cursor.getColumnIndex(TAGLINE)));
-            unProducto.setNumber_of_seasons(cursor.getInt(cursor.getColumnIndex(NUMBER_OF_SEASONS)));
-            unProducto.setNumber_of_episodes(cursor.getInt(cursor.getColumnIndex(NUMBER_OF_EPISODES)));
-            unProducto.setBudget(cursor.getInt(cursor.getColumnIndex(BUDGET)));
-            unProducto.setRevenue(cursor.getInt(cursor.getColumnIndex(REVENUE)));
-
-            formatos.add(unProducto);
-        }
-
-        //CERRAR
-        cursor.close();
-        database.close();
-
-        return formatos;
-    }
-
-    public List<Producto> busquedaPorPresupuestoPeliculas(){
-        String select;
-
-        List<Producto> formatos  = new ArrayList<>();
-        SQLiteDatabase database = getReadableDatabase();
-
-
-
-        select = "SELECT * FROM " + TABLE_FORMATOS+" WHERE TITLE IS NOT NULL ORDER BY BUDGET ASC";
-
-
-
-        Cursor cursor = database.rawQuery(select, null);
-        while(cursor.moveToNext()){
-
-            //LEER CADA FILA DE LA TABLA RESULTADO
-            Producto unProducto = new Producto();
-            unProducto.setTitle(cursor.getString(cursor.getColumnIndex(TITLE)));
-            unProducto.setRelease_date(cursor.getString(cursor.getColumnIndex(RELEASE_DATE)));
-            unProducto.setOverview(cursor.getString(cursor.getColumnIndex(OVERVIEW)));
-            unProducto.setVote_average(cursor.getFloat(cursor.getColumnIndex(VOTE_AVERAGE)));
-            unProducto.setTipoFormato(cursor.getString(cursor.getColumnIndex(TIPO_FORMATO)));
-            unProducto.setPoster_path(cursor.getString(cursor.getColumnIndex(POSTER_PATH)));
-            unProducto.setId(cursor.getInt(cursor.getColumnIndex(ID)));
-            unProducto.setBackdrop_path(cursor.getString(cursor.getColumnIndex(BACKDROP_PATH)));
-            unProducto.setName(cursor.getString(cursor.getColumnIndex(NAME)));
-            unProducto.setFirst_air_date(cursor.getString(cursor.getColumnIndex(FIRST_AIR_DATE)));
-            unProducto.setTagline(cursor.getString(cursor.getColumnIndex(TAGLINE)));
-            unProducto.setNumber_of_seasons(cursor.getInt(cursor.getColumnIndex(NUMBER_OF_SEASONS)));
-            unProducto.setNumber_of_episodes(cursor.getInt(cursor.getColumnIndex(NUMBER_OF_EPISODES)));
-            unProducto.setBudget(cursor.getInt(cursor.getColumnIndex(BUDGET)));
-            unProducto.setRevenue(cursor.getInt(cursor.getColumnIndex(REVENUE)));
-
-            formatos.add(unProducto);
-        }
-
-        //CERRAR
-        cursor.close();
-        database.close();
-
-        return formatos;
-    }
-
-
-    public List<Producto> busquedaPorVotoSerie(){
-        String select;
-
-        List<Producto> formatos  = new ArrayList<>();
-        SQLiteDatabase database = getReadableDatabase();
-
-
-
-        select = "SELECT * FROM " + TABLE_FORMATOS+" WHERE NAME IS NOT NULL ORDER BY VOTE_AVERAGE ASC";
-
-
-
-        Cursor cursor = database.rawQuery(select, null);
-        while(cursor.moveToNext()){
-
-            //LEER CADA FILA DE LA TABLA RESULTADO
-            Producto unProducto = new Producto();
-            unProducto.setTitle(cursor.getString(cursor.getColumnIndex(TITLE)));
-            unProducto.setRelease_date(cursor.getString(cursor.getColumnIndex(RELEASE_DATE)));
-            unProducto.setOverview(cursor.getString(cursor.getColumnIndex(OVERVIEW)));
-            unProducto.setVote_average(cursor.getFloat(cursor.getColumnIndex(VOTE_AVERAGE)));
-            unProducto.setTipoFormato(cursor.getString(cursor.getColumnIndex(TIPO_FORMATO)));
-            unProducto.setPoster_path(cursor.getString(cursor.getColumnIndex(POSTER_PATH)));
-            unProducto.setId(cursor.getInt(cursor.getColumnIndex(ID)));
-            unProducto.setBackdrop_path(cursor.getString(cursor.getColumnIndex(BACKDROP_PATH)));
-            unProducto.setName(cursor.getString(cursor.getColumnIndex(NAME)));
-            unProducto.setFirst_air_date(cursor.getString(cursor.getColumnIndex(FIRST_AIR_DATE)));
-            unProducto.setTagline(cursor.getString(cursor.getColumnIndex(TAGLINE)));
-            unProducto.setNumber_of_seasons(cursor.getInt(cursor.getColumnIndex(NUMBER_OF_SEASONS)));
-            unProducto.setNumber_of_episodes(cursor.getInt(cursor.getColumnIndex(NUMBER_OF_EPISODES)));
-            unProducto.setBudget(cursor.getInt(cursor.getColumnIndex(BUDGET)));
-            unProducto.setRevenue(cursor.getInt(cursor.getColumnIndex(REVENUE)));
-
-            formatos.add(unProducto);
-        }
-
-        //CERRAR
-        cursor.close();
-        database.close();
-
-        return formatos;
-    }
-
-    public List<Producto> busquedaPorPresupuestoSerie(){
-        String select;
-
-        List<Producto> formatos  = new ArrayList<>();
-        SQLiteDatabase database = getReadableDatabase();
-
-
-
-        select = "SELECT * FROM " + TABLE_FORMATOS+" WHERE NAME IS NOT NULL ORDER BY BUDGET ASC";
-
-
-
-        Cursor cursor = database.rawQuery(select, null);
-        while(cursor.moveToNext()){
-
-            //LEER CADA FILA DE LA TABLA RESULTADO
-            Producto unProducto = new Producto();
-            unProducto.setTitle(cursor.getString(cursor.getColumnIndex(TITLE)));
-            unProducto.setRelease_date(cursor.getString(cursor.getColumnIndex(RELEASE_DATE)));
-            unProducto.setOverview(cursor.getString(cursor.getColumnIndex(OVERVIEW)));
-            unProducto.setVote_average(cursor.getFloat(cursor.getColumnIndex(VOTE_AVERAGE)));
-            unProducto.setTipoFormato(cursor.getString(cursor.getColumnIndex(TIPO_FORMATO)));
-            unProducto.setPoster_path(cursor.getString(cursor.getColumnIndex(POSTER_PATH)));
-            unProducto.setId(cursor.getInt(cursor.getColumnIndex(ID)));
-            unProducto.setBackdrop_path(cursor.getString(cursor.getColumnIndex(BACKDROP_PATH)));
-            unProducto.setName(cursor.getString(cursor.getColumnIndex(NAME)));
-            unProducto.setFirst_air_date(cursor.getString(cursor.getColumnIndex(FIRST_AIR_DATE)));
-            unProducto.setTagline(cursor.getString(cursor.getColumnIndex(TAGLINE)));
-            unProducto.setNumber_of_seasons(cursor.getInt(cursor.getColumnIndex(NUMBER_OF_SEASONS)));
-            unProducto.setNumber_of_episodes(cursor.getInt(cursor.getColumnIndex(NUMBER_OF_EPISODES)));
-            unProducto.setBudget(cursor.getInt(cursor.getColumnIndex(BUDGET)));
-            unProducto.setRevenue(cursor.getInt(cursor.getColumnIndex(REVENUE)));
-
-            formatos.add(unProducto);
-        }
-
-        //CERRAR
-        cursor.close();
-        database.close();
-
-        return formatos;
-    }
 }

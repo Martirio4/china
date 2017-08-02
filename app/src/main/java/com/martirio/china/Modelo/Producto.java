@@ -8,7 +8,6 @@ import java.util.List;
 
 public class Producto {
     private String nombreProducto;
-
     private List<String> fotos;
     private String descripcion;
     private Double pesoBulto;
@@ -18,8 +17,17 @@ public class Producto {
     private Integer anchoBulto;
     private Integer altoBulto;
     private String idProducto;
+    private String idVendedor;
     private Double precioUnitario;
     private Integer profundidadBulto;
+
+    public String getIdVendedor() {
+        return idVendedor;
+    }
+
+    public void setIdVendedor(String idVendedor) {
+        this.idVendedor = idVendedor;
+    }
 
     public Producto() {
     }

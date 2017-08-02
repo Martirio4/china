@@ -7,45 +7,63 @@ import java.util.List;
  */
 
 public class Vendedor {
-    private String nombre;
-    private String mail;
-    private String telefono;
-    private String observacion;
+    private String nombreVendedor;
+    private String mailVendedor;
+    private String idVendedor;
+    private String telefonoVendedor;
+    private String fotoVendedor;
+    private String observacionVendedor;
     private List<Producto> listaProductosVendedor;
+
+    public String getIdVendedor() {
+        return idVendedor;
+    }
+
+    public void setIdVendedor(String idVendedor) {
+        this.idVendedor = idVendedor;
+    }
+
+    public String getFotoVendedor() {
+        return fotoVendedor;
+    }
+
+    public void setFotoVendedor(String fotoVendedor) {
+        this.fotoVendedor = fotoVendedor;
+    }
 
     public Vendedor() {
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombreVendedor() {
+        return nombreVendedor;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombreVendedor(String nombreVendedor) {
+        this.nombreVendedor = nombreVendedor;
     }
 
-    public String getMail() {
-        return mail;
+    public String getMailVendedor() {
+        return mailVendedor;
     }
 
-    public void setMail(String mail) {
-        this.mail = mail;
+    public void setMailVendedor(String mailVendedor) {
+        this.mailVendedor = mailVendedor;
     }
 
-    public String getTelefono() {
-        return telefono;
+    public String getTelefonoVendedor() {
+        return telefonoVendedor;
     }
 
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
+    public void setTelefonoVendedor(String telefonoVendedor) {
+        this.telefonoVendedor = telefonoVendedor;
     }
 
-    public String getObservacion() {
-        return observacion;
+    public String getObservacionVendedor() {
+        return observacionVendedor;
     }
 
-    public void setObservacion(String observacion) {
-        this.observacion = observacion;
+    public void setObservacionVendedor(String observacionVendedor) {
+        this.observacionVendedor = observacionVendedor;
     }
 
     public List<Producto> getListaProductosVendedor() {

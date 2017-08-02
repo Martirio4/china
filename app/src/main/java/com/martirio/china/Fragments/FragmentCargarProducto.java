@@ -52,7 +52,7 @@ public class FragmentCargarProducto extends Fragment {
 
 
         imagenProducto=(ImageView) view.findViewById(R.id.imagenProducto);
-        imagenProducto2=(ImageView) view.findViewById(R.id.imagenProducto2);
+
         return view;
     }
 
@@ -71,11 +71,7 @@ public class FragmentCargarProducto extends Fragment {
                 options.inSampleSize = 2;
                 Bitmap bitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath(), options);
                 imagenProducto.setImageBitmap(bitmap);
-                String unString=imageFile.getAbsolutePath();
-                File f= new File(unString);
-                Picasso.with(getActivity())
-                        .load(f)
-                        .into(imagenProducto2);
+
 
             }
 

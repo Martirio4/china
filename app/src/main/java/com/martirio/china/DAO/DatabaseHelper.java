@@ -25,10 +25,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        //CREO TABLA DE FORMATOS
+        //CREO TABLA DE PRODUCTOS
         String query =  "CREATE TABLE " + DAOProductosDatabase.TABLE_PRODUCTOS  + "(" +
                 DAOProductosDatabase.NOMBREPRODUCTO + " TEXT, " +
                 DAOProductosDatabase.DESCRIPCION + " TEXT, " +
+                DAOProductosDatabase.IDVENDEDOR + " TEXT, " +
                 DAOProductosDatabase.PESOBULTO + " REAL, " +
                 DAOProductosDatabase.CANTIDADBULTO + " FLOAT, " +
                 DAOProductosDatabase.PRECIOBULTO + " REAL, " +
@@ -40,36 +41,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 DAOProductosDatabase.PRECIOUNITARIO + " REAL, ";
         db.execSQL(query);
 
-        //CREO TABLA DE USUARIOS
-        String query2 =  "CREATE TABLE " + DAOUsuarioDatabase.TABLE_USUARIOS  + "(" +
-                DAOUsuarioDatabase.USER + " TEXT, " +
-                DAOUsuarioDatabase.PASS + " TEXT, " +
-                DAOUsuarioDatabase.PAIS + " TEXT, " +
-                DAOUsuarioDatabase.MAIL + " TEXT, " +
-                DAOUsuarioDatabase.IDIOMA + " TEXT, " +
-                DAOUsuarioDatabase.IDUSUARIO + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                DAOUsuarioDatabase.FECHANACIMIENTO + " TEXT )";
+        //CREO TABLA DE VENDEDORES
+        String query2 =  "CREATE TABLE " + DAOVendedorDatabase.TABLE_VENDEDORES  + "(" +
+                DAOVendedorDatabase.NOMBREVENDEDOR + " TEXT, " +
+                DAOVendedorDatabase.MAILVENDEDOR + " TEXT, " +
+                DAOVendedorDatabase.TELEFONOVENDEDOR + " TEXT, " +
+                DAOVendedorDatabase.FOTOVENDEDOR + " TEXT, " +
+                DAOVendedorDatabase.IDVENDEDOR + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                DAOVendedorDatabase.OBSERVACIONVENDEDOR + " TEXT )";
         db.execSQL(query2);
 
-        //CREAR TABLA DE FAVORITOS
-        String query3 =  "CREATE TABLE " + DAOFavoritosDatabase.TABLE_FAVORITOS  + "(" +
-                DAOFavoritosDatabase.TITLE + " TEXT, " +
-                DAOFavoritosDatabase.MAIL + " TEXT, " +
-                DAOFavoritosDatabase.RELEASE_DATE + " TEXT, " +
-                DAOFavoritosDatabase.OVERVIEW + " TEXT, " +
-                DAOFavoritosDatabase.VOTE_AVERAGE + " FLOAT, " +
-                DAOFavoritosDatabase.TIPO_FORMATO + " TEXT, " +
-                DAOFavoritosDatabase.POSTER_PATH + " TEXT, " +
-                DAOFavoritosDatabase.ID + " INTEGER PRIMARY KEY, " +
-                DAOFavoritosDatabase.BACKDROP_PATH + " TEXT, " +
-                DAOFavoritosDatabase.NAME + " TEXT, " +
-                DAOFavoritosDatabase.FIRST_AIR_DATE + " TEXT, " +
-                DAOFavoritosDatabase.TAGLINE + " TEXT, " +
-                DAOFavoritosDatabase.NUMBER_OF_SEASONS + " INTEGER, " +
-                DAOFavoritosDatabase.NUMBER_OF_EPISODES + " INTEGER, " +
-                DAOFavoritosDatabase.BUDGET + " INTEGER, " +
-                DAOFavoritosDatabase.REVENUE + " INTEGER )";
+        //CREO TABLA DE VENDEDORES
+        String query3 =  "CREATE TABLE " + DAOImagenesDatabase.TABLE_IMAGENES  + "(" +
+                DAOVendedorDatabase.NOMBREVENDEDOR + " TEXT, " +
+                DAOVendedorDatabase.MAILVENDEDOR + " TEXT, " +
+                DAOVendedorDatabase.TELEFONOVENDEDOR + " TEXT, " +
+                DAOVendedorDatabase.FOTOVENDEDOR + " TEXT, " +
+                DAOVendedorDatabase.IDVENDEDOR + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                DAOVendedorDatabase.OBSERVACIONVENDEDOR + " TEXT )";
         db.execSQL(query3);
+
 
 
 
