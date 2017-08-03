@@ -4,198 +4,243 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:focusableInTouchMode="true"
-    android:background="@color/marfil"
+   android:background="@color/fondoOscuro"
     android:layout_height="match_parent"
     tools:context="com.martirio.china.Fragments.FragmentCargarProducto">
 
-
-    <android.support.design.widget.TextInputLayout
-        android:layout_marginLeft="@dimen/margenChico"
-        android:layout_marginRight="@dimen/margenChico"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <EditText
-            android:textColor="@color/textoOscuro"
-            android:hint="@string/hintTituloProducto"
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:textColorHighlight="@color/textoOscuro"
-            android:textColorHint="@color/textoOscuro"
-            android:layout_height="wrap_content" />
-    </android.support.design.widget.TextInputLayout>
-
-
-    <android.support.design.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    </android.support.design.widget.CoordinatorLayout>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/altoFrameLayout"
-        android:layout_gravity="center_horizontal"
-        android:padding="8dp">
-
-        <android.support.v7.widget.CardView
-            android:layout_width="@dimen/anchoTarjetaCargarProducto"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:elevation="@dimen/elevacionTarjetaCargaProducto">
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical">
 
-                <ImageView
-                    android:id="@+id/imagenProducto"
-                    android:layout_width="@dimen/anchoFotoCargarProducto"
-                    android:layout_height="@dimen/altoFotoCargarProducto"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="4dp"
-                    android:background="@color/fondoOscuro"
-                    android:scaleType="centerCrop" />
-
-
-
-
-
-            <com.github.clans.fab.FloatingActionButton
-                android:id="@+id/fabImagen"
-                android:layout_width="wrap_content"
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom|right"
-                android:layout_margin="@dimen/margenChico" />
+                android:layout_marginLeft="@dimen/margenChico"
+                android:layout_marginRight="@dimen/margenChico"
+                android:textColorHint="@color/marfil">
 
-        </android.support.v7.widget.CardView>
-
-
-    </FrameLayout>
-    <android.support.design.widget.TextInputLayout
-        android:layout_marginLeft="@dimen/margenChico"
-        android:layout_marginRight="@dimen/margenChico"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <EditText
-            android:textColor="@color/textoOscuro"
-            android:hint="@string/hintDescripcion"
-            android:layout_width="match_parent"
-            android:textColorHighlight="@color/textoOscuro"
-            android:textColorHint="@color/textoOscuro"
-            android:layout_height="wrap_content" />
-    </android.support.design.widget.TextInputLayout>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hintTituloProducto"
+                    android:backgroundTint="@color/amarillo"
+                    android:textColor="@color/amarillo" />
+            </android.support.design.widget.TextInputLayout>
 
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_marginLeft="@dimen/margenChico"
-            android:layout_marginRight="@dimen/margenChico"
-            android:layout_width="0dp"
-            android:layout_weight="50"
-            android:layout_height="wrap_content">
-            <EditText
-                android:textColor="@color/textoOscuro"
-                android:hint="@string/hintAncho"
+            <android.support.design.widget.CoordinatorLayout
                 android:layout_width="match_parent"
-                android:textColorHighlight="@color/textoOscuro"
-                android:textColorHint="@color/textoOscuro"
-                android:layout_height="wrap_content" />
-        </android.support.design.widget.TextInputLayout>
+                android:layout_height="wrap_content">
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_marginLeft="@dimen/margenChico"
-            android:layout_marginRight="@dimen/margenChico"
-            android:layout_width="0dp"
-            android:layout_weight="50"
-            android:layout_height="wrap_content">
-            <EditText
-                android:textColor="@color/textoOscuro"
-                android:hint="@string/hintAlto"
+            </android.support.design.widget.CoordinatorLayout>
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:textColorHighlight="@color/textoOscuro"
-                android:textColorHint="@color/textoOscuro"
-                android:layout_height="wrap_content" />
-        </android.support.design.widget.TextInputLayout>
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal">
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_marginLeft="@dimen/margenChico"
-            android:layout_marginRight="@dimen/margenChico"
-            android:layout_width="0dp"
-            android:layout_weight="50"
-            android:layout_height="wrap_content">
-            <EditText
-                android:textColor="@color/textoOscuro"
-                android:hint="@string/hintProfuncidad"
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerFotos"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/altoRecycler"
+                    android:layout_gravity="center"
+                    android:background="@color/amarillo">
+
+                </android.support.v7.widget.RecyclerView>
+
+
+                <com.github.clans.fab.FloatingActionButton
+                    android:id="@+id/fabImagen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_margin="@dimen/margenFAB" />
+
+            </RelativeLayout>
+
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:textColorHighlight="@color/textoOscuro"
-                android:textColorHint="@color/textoOscuro"
-                android:layout_height="wrap_content" />
-        </android.support.design.widget.TextInputLayout>
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margenChico"
+                android:layout_marginRight="@dimen/margenChico"
+                android:textColorHint="@color/marfil">
 
-    </LinearLayout>
-    <android.support.design.widget.TextInputLayout
-        android:layout_marginLeft="@dimen/margenChico"
-        android:layout_marginRight="@dimen/margenChico"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <EditText
-            android:textColor="@color/textoOscuro"
-            android:hint="@string/hintCantidadBulto"
-            android:layout_width="match_parent"
-            android:textColorHighlight="@color/textoOscuro"
-            android:textColorHint="@color/textoOscuro"
-            android:layout_height="wrap_content" />
-    </android.support.design.widget.TextInputLayout>
+                <EditText
+                    android:id="@+id/editText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/amarillo"
+                    android:hint="@string/hintDescripcion"
+                    android:textColor="@color/marfil" />
+            </android.support.design.widget.TextInputLayout>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_marginLeft="@dimen/margenChico"
-            android:layout_marginRight="@dimen/margenChico"
-            android:layout_width="0dp"
-            android:layout_weight="50"
-            android:layout_height="wrap_content">
-            <EditText
-                android:textColor="@color/textoOscuro"
-                android:hint="@string/hintPrecioUnitario"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:textColorHighlight="@color/textoOscuro"
-                android:textColorHint="@color/textoOscuro"
-                android:layout_height="wrap_content" />
-        </android.support.design.widget.TextInputLayout>
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_marginLeft="@dimen/margenChico"
-            android:layout_marginRight="@dimen/margenChico"
-            android:layout_width="0dp"
-            android:layout_weight="50"
-            android:layout_height="wrap_content">
-            <EditText
-                android:textColor="@color/textoOscuro"
-                android:hint="@string/hintPrecioBulto"
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="50"
+                    android:orientation="vertical">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margenChico"
+                        android:layout_marginRight="@dimen/margenChico"
+                        android:textColorHint="@color/marfil">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/hintAncho"
+
+                            android:inputType="numberDecimal"
+                            android:textColor="@color/amarillo"
+                            android:textSize="@dimen/textoMedidas" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:layout_marginLeft="@dimen/margenChico"
+                        android:layout_marginRight="@dimen/margenChico"
+                        android:textColorHint="@color/marfil">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/hintAlto"
+                            android:inputType="numberDecimal"
+                            android:textColor="@color/amarillo"
+                            android:textSize="@dimen/textoMedidas" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margenChico"
+                        android:layout_marginRight="@dimen/margenChico"
+                        android:textColorHint="@color/marfil">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/hintProfuncidad"
+                            android:inputType="numberDecimal"
+                            android:textColor="@color/amarillo"
+                            android:textSize="@dimen/textoMedidas" />
+                    </android.support.design.widget.TextInputLayout>
+
+
+
+                        <Spinner
+                            android:id="@+id/spinner1"
+                            android:backgroundTint="@color/amarillo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                        </Spinner>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="50"
+                    android:orientation="vertical">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginLeft="@dimen/margenChico"
+                        android:layout_marginRight="@dimen/margenChico"
+                        android:layout_weight="50"
+                        android:textColorHint="@color/marfil">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/amarillo"
+                            android:hint="@string/hintCantidadBulto"
+                            android:inputType="number"
+                            android:textColor="@color/amarillo" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginLeft="@dimen/margenChico"
+                        android:layout_marginRight="@dimen/margenChico"
+                        android:layout_weight="50"
+                        android:textColorHint="@color/marfil">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/hintPesoBulto"
+                            android:inputType="number"
+                            android:backgroundTint="@color/amarillo"
+                            android:textColor="@color/amarillo" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginLeft="@dimen/margenChico"
+                        android:layout_marginRight="@dimen/margenChico"
+                        android:layout_weight="50"
+                        android:textColorHint="@color/marfil">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/hintPrecioBulto"
+                            android:inputType="numberDecimal"
+                            android:backgroundTint="@color/amarillo"
+                            android:textColor="@color/amarillo"/>
+                    </android.support.design.widget.TextInputLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:textColorHighlight="@color/textoOscuro"
-                android:textColorHint="@color/textoOscuro"
-                android:layout_height="wrap_content" />
-        </android.support.design.widget.TextInputLayout>
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_marginLeft="@dimen/margenChico"
-            android:layout_marginRight="@dimen/margenChico"
-            android:layout_width="0dp"
-            android:layout_weight="50"
-            android:layout_height="wrap_content">
-            <EditText
-                android:textColor="@color/textoOscuro"
-                android:hint="@string/hintMoneda"
-                android:layout_width="match_parent"
-                android:textColorHighlight="@color/textoOscuro"
-                android:textColorHint="@color/textoOscuro"
-                android:layout_height="wrap_content" />
-        </android.support.design.widget.TextInputLayout>
 
-    </LinearLayout>
+
+
+
+
+                <Spinner
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                </Spinner>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
 
 </LinearLayout>

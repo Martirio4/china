@@ -7,27 +7,41 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
+import com.martirio.china.Adapters.AdapterFotos;
 import com.martirio.china.R;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 
 import pl.aprilapps.easyphotopicker.DefaultCallback;
 import pl.aprilapps.easyphotopicker.EasyImage;
 
 
-public class FragmentCargarProducto extends Fragment {
+public class FragmentCargarProducto extends Fragment implements AdapterView.OnItemSelectedListener {
 
-    ImageView imagenProducto;
-    ImageView imagenProducto2;
+    private RecyclerView recyclerFotos;
+    private List<String> listaFotos;
+    private AdapterFotos adapterFotos;
+    private LinearLayoutManager layoutManager;
+    private Spinner spinner;
+
+
 
     public FragmentCargarProducto() {
         // Required empty public constructor
@@ -40,6 +54,17 @@ public class FragmentCargarProducto extends Fragment {
         // Inflate the layout for this fragment
         final View view= inflater.inflate(R.layout.cargar_producto_fragment, container, false);
 
+        recyclerFotos=(RecyclerView)view.findViewById(R.id.recyclerFotos);
+        listaFotos=new ArrayList<>();
+        layoutManager= new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerFotos.setLayoutManager(layoutManager);
+        adapterFotos=new AdapterFotos();
+        adapterFotos.setContext(getContext());
+        adapterFotos.setListaStringsOriginales(listaFotos);
+        recyclerFotos.setAdapter(adapterFotos);
+
+
+
         FloatingActionButton sacarFoto=(FloatingActionButton) view.findViewById(R.id.fabImagen);
         sacarFoto.setImageResource(R.drawable.ic_camera_alt_black_24dp);
         sacarFoto.setButtonSize(FloatingActionButton.SIZE_NORMAL);
@@ -50,11 +75,16 @@ public class FragmentCargarProducto extends Fragment {
             }
         });
 
+        //spinner
+        spinner= (Spinner)view.findViewById(R.id.spinner1);
+        ArrayAdapter arrAdapter=ArrayAdapter.createFromResource(getContext(),R.array.moneda,R.layout.simple_spinner_item);
+        spinner.setAdapter(arrAdapter);
+        spinner.setOnItemSelectedListener(this);
 
-        imagenProducto=(ImageView) view.findViewById(R.id.imagenProducto);
 
         return view;
     }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -67,10 +97,10 @@ public class FragmentCargarProducto extends Fragment {
 
             @Override
             public void onImagePicked(File imageFile, EasyImage.ImageSource source, int type) {
-                BitmapFactory.Options options = new BitmapFactory.Options();
-                options.inSampleSize = 2;
-                Bitmap bitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath(), options);
-                imagenProducto.setImageBitmap(bitmap);
+
+            listaFotos.add(imageFile.getAbsolutePath());
+            adapterFotos.notifyDataSetChanged();
+
 
 
             }
@@ -87,5 +117,14 @@ public class FragmentCargarProducto extends Fragment {
         });
     }
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        Toast.makeText(getContext(), "hola que tal ", Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+}
 

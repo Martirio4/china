@@ -8,6 +8,8 @@
     <color name="textoNegro">#212121</color>
     <color name="textoAzul">#3f51b5</color>
     <color name="textoClaro">#ffeb90</color>
+    <color name="amarillo">#ffb74d</color>
     <color name="textoOscuro">#e53935</color>
     <color name="marfil">#ffffff</color>
+    <color name="naranja">#ce8d0d</color>
 </resources>

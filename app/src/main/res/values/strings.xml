@@ -9,6 +9,7 @@
     <string name="tituloCargarProducto">Nuevo producto</string>
     <string name="hintTituloProducto">Nombre del  Producto</string>
     <string name="hintCantidadBulto">Cantidad por bulto</string>
+    <string name="hintPesoBulto">Peso bulto(Kg)</string>
     <string name="hintDescripcion">Descripción del Producto</string>
     <string name="hintAncho">Ancho (mm)</string>
     <string name="hintAlto">Alto (mm)</string>
@@ -16,5 +17,11 @@
     <string name="hintPrecioUnitario">Precio Unitario</string>
     <string name="hintMoneda">Divisa</string>
     <string name="hintPrecioBulto">Precio Bulto</string>
+
+    <string-array name="moneda">
+        <item> name="¥ - CNY"></item>
+        <item> name="$ - USD"></item>
+    </string-array>
+
 
 </resources>

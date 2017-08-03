@@ -2,11 +2,16 @@
 <resources>
     <dimen name="tamañoTitulos">20sp</dimen>
     <dimen name="anchoFotoCargarProducto">300dp</dimen>
-    <dimen name="altoFotoCargarProducto">200dp</dimen>
+    <dimen name="altoFotoCargarProducto">198dp</dimen>
     <dimen name="margenChico">12dp</dimen>
 
-    <dimen name="altoTarjetaCargarProducto">230dp</dimen>
+    <dimen name="altoTarjetaCargarProducto">208dp</dimen>
     <dimen name="altoFrameLayout">240dp</dimen>
     <dimen name="anchoTarjetaCargarProducto">308dp</dimen>
     <dimen name="elevacionTarjetaCargaProducto">10dp</dimen>
+    <dimen name="margenFAB">8dp</dimen>
+    <dimen name="textoMedidas">12sp</dimen>
+    <dimen name="altoRecycler">212dp</dimen>
+    <dimen name="anchoLayoutCargarProducto">314dp</dimen>
+    <dimen name="altoLayoutaCargarProducto">214dp</dimen>
 </resources>

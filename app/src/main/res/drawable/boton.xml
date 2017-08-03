@@ -2,9 +2,10 @@
     <shape
         xmlns:android="http://schemas.android.com/apk/res/android">
         <stroke
-            android:width="3dp"
-            android:color="@color/fondoOscuro"/>
-
+            android:width="2dp"
+            android:color="@color/amarillo"/>
+    <corners
+        android:radius="20dp" />
 
 
         <padding
@@ -13,5 +14,5 @@
             android:top="4dp"
             android:bottom="4dp"/>
 
-        <solid android:color="@color/marfil"/>
+        <solid android:color="@color/fondoOscuro"/>
     </shape>

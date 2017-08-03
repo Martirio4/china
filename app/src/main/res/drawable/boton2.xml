@@ -2,10 +2,10 @@
     <shape
         xmlns:android="http://schemas.android.com/apk/res/android">
         <stroke
-            android:width="3dp"
-            android:color="@color/marfil"/>
+            android:width="2dp"
+            android:color="@color/amarillo"/>
         <corners
-            android:radius="20dp" />
+            android:radius="10dp" />
 
 
         <padding
@@ -14,5 +14,5 @@
             android:top="1dp"
             android:bottom="1dp"/>
 
-        <solid android:color="#4db6ac"/>
+        <solid android:color="@color/cardview_dark_background"/>
     </shape>
