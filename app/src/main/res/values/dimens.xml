@@ -10,7 +10,7 @@
     <dimen name="anchoTarjetaCargarProducto">308dp</dimen>
     <dimen name="elevacionTarjetaCargaProducto">10dp</dimen>
     <dimen name="margenFAB">8dp</dimen>
-    <dimen name="textoMedidas">12sp</dimen>
+    <dimen name="textoMedidas">14sp</dimen>
     <dimen name="altoRecycler">212dp</dimen>
     <dimen name="anchoLayoutCargarProducto">314dp</dimen>
     <dimen name="altoLayoutaCargarProducto">214dp</dimen>

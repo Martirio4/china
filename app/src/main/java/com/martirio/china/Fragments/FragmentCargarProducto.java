@@ -39,7 +39,6 @@ public class FragmentCargarProducto extends Fragment implements AdapterView.OnIt
     private List<String> listaFotos;
     private AdapterFotos adapterFotos;
     private LinearLayoutManager layoutManager;
-    private Spinner spinner;
 
 
 
@@ -75,11 +74,6 @@ public class FragmentCargarProducto extends Fragment implements AdapterView.OnIt
             }
         });
 
-        //spinner
-        spinner= (Spinner)view.findViewById(R.id.spinner1);
-        ArrayAdapter arrAdapter=ArrayAdapter.createFromResource(getContext(),R.array.moneda,R.layout.simple_spinner_item);
-        spinner.setAdapter(arrAdapter);
-        spinner.setOnItemSelectedListener(this);
 
 
         return view;

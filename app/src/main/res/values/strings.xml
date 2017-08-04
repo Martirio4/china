@@ -17,10 +17,16 @@
     <string name="hintPrecioUnitario">Precio Unitario</string>
     <string name="hintMoneda">Divisa</string>
     <string name="hintPrecioBulto">Precio Bulto</string>
+    <string name="hintSpinnerMoneda">Divisa</string>
+    <string name="hintVendedor">Datos vendedor</string>
+    <string name="hintNombreVendedor">Nombre del vendedor</string>
+    <string name="hintTelefonoVendedor">Telefono</string>
+    <string name="hintObservacionVendedor">Observaciones</string>
+    <string name="hintMailVendedor">Mail</string>
 
     <string-array name="moneda">
-        <item> name="¥ - CNY"></item>
-        <item> name="$ - USD"></item>
+        <item>¥ - CNY</item>
+        <item>$ - USD</item>
     </string-array>
 
 
