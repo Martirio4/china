@@ -14,6 +14,12 @@
         <item name="android:textColorSecondary">@color/marfil</item>
     </style>
 
+    <style name="MenuButtonsStyle">
+        <item name="fab_size">normal</item>
+        <item name="fab_shadowColor">#444</item>
+        <item name="elevation">4dp</item>
+        <item name="fab_colorNormal">@color/colorPrimary</item>
+        <item name="fab_colorPressed">@color/colorPrimaryDark</item> </style>
 
 
 </resources>

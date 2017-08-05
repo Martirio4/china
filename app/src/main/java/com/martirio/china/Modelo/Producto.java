@@ -10,7 +10,7 @@ public class Producto {
     private String nombreProducto;
     private List<String> fotos;
     private String descripcion;
-    private Double pesoBulto;
+    private Integer pesoBulto;
     private Integer cantidadBulto;
     private Double precioBulto;
     private String monedaBulto;
@@ -72,11 +72,11 @@ public class Producto {
         this.descripcion = descripcion;
     }
 
-    public Double getPesoBulto() {
+    public Integer getPesoBulto() {
         return pesoBulto;
     }
 
-    public void setPesoBulto(Double pesoBulto) {
+    public void setPesoBulto(Integer pesoBulto) {
         this.pesoBulto = pesoBulto;
     }
 

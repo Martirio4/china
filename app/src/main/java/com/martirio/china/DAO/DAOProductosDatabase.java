@@ -35,7 +35,7 @@ public class DAOProductosDatabase extends DatabaseHelper {
         super(context);
     }
 
-    public void agregarProducto(Producto unProducto, String tipoFormato){
+    public void agregarProducto(Producto unProducto){
 
         if(!checkIfExist(unProducto.getIdProducto())) {
 
@@ -62,10 +62,10 @@ public class DAOProductosDatabase extends DatabaseHelper {
         }
     }
 
-    public void addProductosVarios(List<Producto> formatosList,String tipoFormato){
+    public void addProductosVarios(List<Producto> formatosList){
 
         for(Producto unProducto : formatosList){
-            agregarProducto(unProducto, tipoFormato);
+            agregarProducto(unProducto);
         }
     }
 
@@ -84,7 +84,7 @@ public class DAOProductosDatabase extends DatabaseHelper {
             unProducto.setNombreProducto(cursor.getString(cursor.getColumnIndex(NOMBREPRODUCTO)));
             unProducto.setDescripcion(cursor.getString(cursor.getColumnIndex(DESCRIPCION)));
             unProducto.setDescripcion(cursor.getString(cursor.getColumnIndex(IDVENDEDOR)));
-            unProducto.setPesoBulto(cursor.getDouble(cursor.getColumnIndex(PESOBULTO)));
+            unProducto.setPesoBulto(cursor.getInt(cursor.getColumnIndex(PESOBULTO)));
             unProducto.setPrecioUnitario(cursor.getDouble(cursor.getColumnIndex(PRECIOUNITARIO)));
             unProducto.setPrecioBulto(cursor.getDouble(cursor.getColumnIndex(PRECIOBULTO)));
             unProducto.setCantidadBulto(cursor.getInt(cursor.getColumnIndex(CANTIDADBULTO)));
@@ -120,7 +120,7 @@ public class DAOProductosDatabase extends DatabaseHelper {
             unProducto.setNombreProducto(cursor.getString(cursor.getColumnIndex(NOMBREPRODUCTO)));
             unProducto.setDescripcion(cursor.getString(cursor.getColumnIndex(DESCRIPCION)));
             unProducto.setDescripcion(cursor.getString(cursor.getColumnIndex(IDVENDEDOR)));
-            unProducto.setPesoBulto(cursor.getDouble(cursor.getColumnIndex(PESOBULTO)));
+            unProducto.setPesoBulto(cursor.getInt(cursor.getColumnIndex(PESOBULTO)));
             unProducto.setPrecioUnitario(cursor.getDouble(cursor.getColumnIndex(PRECIOUNITARIO)));
             unProducto.setPrecioBulto(cursor.getDouble(cursor.getColumnIndex(PRECIOBULTO)));
             unProducto.setCantidadBulto(cursor.getInt(cursor.getColumnIndex(CANTIDADBULTO)));

@@ -28,8 +28,8 @@ public class DAOVendedorDatabase extends DatabaseHelper {
         super(context);
     }
 
-    public void addVendedor (Vendedor unVendedor, String tipoVendedor){
-        if(!checkIfExist(unVendedor.getIdVendedor())) {
+    public void addVendedor (Vendedor unVendedor){
+
             SQLiteDatabase database = getWritableDatabase();
             //CREO LA FILA Y LE CARGO LOS DATOS
             ContentValues row = new ContentValues();
@@ -42,7 +42,7 @@ public class DAOVendedorDatabase extends DatabaseHelper {
             //LE DIGO A LA BD QUE CARGUE LA FILA EN LA TABLA
             database.insert(TABLE_VENDEDORES, null, row);
             database.close();
-        }
+
     }
 
     public List<Vendedor> traerVendedores(){

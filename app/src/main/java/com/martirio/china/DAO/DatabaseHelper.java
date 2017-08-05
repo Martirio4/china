@@ -38,7 +38,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 DAOProductosDatabase.ALTOBULTO + " INTEGER, " +
                 DAOProductosDatabase.PROFUNDIDADBULTO + " INTEGER, " +
                 DAOProductosDatabase.IDPRODUCTO + " TEXT PRIMARY KEY, " +
-                DAOProductosDatabase.PRECIOUNITARIO + " REAL, ";
+                DAOProductosDatabase.PRECIOUNITARIO + " REAL )";
         db.execSQL(query);
 
         //CREO TABLA DE VENDEDORES

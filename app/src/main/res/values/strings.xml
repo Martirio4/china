@@ -23,6 +23,8 @@
     <string name="hintTelefonoVendedor">Telefono</string>
     <string name="hintObservacionVendedor">Observaciones</string>
     <string name="hintMailVendedor">Mail</string>
+    <string name="hintDivisaBulto">Divisa</string>
+    <string name="CargarOrden">Guardar y Salir</string>
 
     <string-array name="moneda">
         <item>¥ - CNY</item>

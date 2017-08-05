@@ -14,4 +14,8 @@
     <color name="naranja">#ce8d0d</color>
     <color name="paleta4">#1de9b6</color>
     <color name="paleta5">#ce8d0d</color>
+
+    <color name="light_grey">#EEEEEE</color>
+    <color name="white_transparent">#99FFFFFF</color>
+    <color name="black">#000</color>
 </resources>
