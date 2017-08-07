@@ -9,6 +9,7 @@ import android.os.Bundle;
 
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -26,11 +27,14 @@ import android.widget.Toast;
 
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
+import com.martirio.china.Activities.MainActivity;
 import com.martirio.china.Adapters.AdapterFotos;
 import com.martirio.china.DAO.DAOImagenesDatabase;
 import com.martirio.china.DAO.DAOProductosDatabase;
 import com.martirio.china.DAO.DAOVendProdDatabase;
 import com.martirio.china.DAO.DAOVendedorDatabase;
+import com.martirio.china.Modelo.Foto;
+import com.martirio.china.Modelo.Orden;
 import com.martirio.china.Modelo.Producto;
 import com.martirio.china.Modelo.Vendedor;
 import com.martirio.china.R;
@@ -42,6 +46,9 @@ import java.util.List;
 import java.util.UUID;
 
 
+import io.realm.Realm;
+import io.realm.RealmList;
+import io.realm.RealmResults;
 import pl.aprilapps.easyphotopicker.DefaultCallback;
 import pl.aprilapps.easyphotopicker.EasyImage;
 
@@ -53,11 +60,13 @@ public class FragmentCargarProducto extends Fragment implements AdapterView.OnIt
     private DAOVendProdDatabase daoVendProdDatabase;
 
     private RecyclerView recyclerFotos;
-    private List<String> listaFotos;
+    private RealmList<Foto> listaFotos;
     private AdapterFotos adapterFotos;
     private LinearLayoutManager layoutManager;
 
     private ImageView fotoVendedor;
+
+    private Integer control;
 
     private EditText nombreProducto;
     private EditText cantidadBulto;
@@ -81,6 +90,7 @@ public class FragmentCargarProducto extends Fragment implements AdapterView.OnIt
     private TextInputLayout inputAnchoBulto;
     private TextInputLayout inputProfundidadBulto;
     private TextInputLayout InputObservacionesBulto;
+    
     private TextInputLayout inputNombreVendedor;
     private TextInputLayout inputMailVendedor;
     private TextInputLayout inputTelefonoVendedor;
@@ -93,6 +103,9 @@ public class FragmentCargarProducto extends Fragment implements AdapterView.OnIt
     private FloatingActionMenu fabMenuCargaProductos;
 
     private FloatingActionButton guardarOrden;
+    private FloatingActionButton agregarProducto;
+    private FloatingActionButton agregarVendedor;
+    private FloatingActionButton salir;
     private String stringFotoVendedor;
 
     public FragmentCargarProducto() {    }
@@ -139,12 +152,12 @@ public class FragmentCargarProducto extends Fragment implements AdapterView.OnIt
         fotoVendedor=(ImageView)view.findViewById(R.id.imageVendedor);
 
         recyclerFotos=(RecyclerView)view.findViewById(R.id.recyclerFotoProductos);
-        listaFotos=new ArrayList<>();
+        listaFotos=new RealmList<>();
         layoutManager= new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerFotos.setLayoutManager(layoutManager);
         adapterFotos=new AdapterFotos();
         adapterFotos.setContext(getContext());
-        adapterFotos.setListaStringsOriginales(listaFotos);
+        adapterFotos.setListaFotosOriginales(listaFotos);
         recyclerFotos.setAdapter(adapterFotos);
 
         fabMenuCargaProductos=(FloatingActionMenu)view.findViewById(R.id.fabMenuCargaProductos);
@@ -176,138 +189,268 @@ public class FragmentCargarProducto extends Fragment implements AdapterView.OnIt
         fabMenuCargaProductos.addMenuButton(guardarOrden);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            guardarOrden.setLabelColors(ContextCompat.getColor(getActivity(), R.color.textoOscuro),
+            guardarOrden.setLabelColors(ContextCompat.getColor(getActivity(), R.color.rojoOscuro),
                     ContextCompat.getColor(getActivity(), R.color.light_grey),
                     ContextCompat.getColor(getActivity(), R.color.white_transparent));
             guardarOrden.setLabelTextColor(ContextCompat.getColor(getActivity(), R.color.black));
         }
         else {
-            guardarOrden.setLabelColors(getResources().getColor(R.color.textoOscuro),
+            guardarOrden.setLabelColors(getResources().getColor(R.color.rojoOscuro),
                     getResources().getColor(R.color.light_grey),
                     getResources().getColor(R.color.white_transparent));
             guardarOrden.setLabelTextColor(getResources().getColor( R.color.black));
         }
+        
+        
 
         guardarOrden.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //controlar los input layout
-                //cargar los datos
-                Producto unProducto = new Producto();
-                Vendedor unVendedor= new Vendedor();
-                Integer control=0;
-
-                unProducto.setIdProducto("PRODUCTO-" + UUID.randomUUID().toString());
-                unVendedor.setIdVendedor("VENDEDOR-"+UUID.randomUUID().toString());
-
-                //comprobaciones producto
-                if (altoBulto.getText()==null||altoBulto.getText().toString().isEmpty()){
-                    unProducto.setAltoBulto(0);
-                }
-                else {
-                    unProducto.setAltoBulto(Integer.parseInt(altoBulto.getText().toString()));
-                }
-
-                if (anchoBulto.getText()==null || anchoBulto.getText().toString().isEmpty()){
-                    unProducto.setAnchoBulto(0);
-                }
-                else{
-                    unProducto.setAnchoBulto(Integer.parseInt(anchoBulto.getText().toString()));
-                }
-               if (profundidadBulto.getText()==null||profundidadBulto.getText().toString().isEmpty()){
-                   unProducto.setProfundidadBulto(0);
-               }
-                else{
-                    unProducto.setProfundidadBulto(Integer.parseInt(profundidadBulto.getText().toString()));
-                }
-                if (cantidadBulto.getText()==null||cantidadBulto.getText().toString().isEmpty()){
-                    unProducto.setCantidadBulto(0);
-                }
-                else{
-                    unProducto.setCantidadBulto(Integer.parseInt(cantidadBulto.getText().toString()));
-                }
-                if (nombreProducto.getText()==null||nombreProducto.getText().toString().isEmpty()){
-                    control=control+1;
-                    inputNombreProducto.setError("Debe ingresar un nombre de producto");
-
-                }
-                else{
-                    unProducto.setNombreProducto(nombreProducto.getText().toString());
-                }
-
-
-                if (divisa.getText()==null||divisa.getText().toString().isEmpty()){
-                    unProducto.setMonedaBulto("USD");
-                }
-                else{
-                    unProducto.setMonedaBulto(divisa.getText().toString());
-                }
-                if (pesoBulto.getText()==null || pesoBulto.getText().toString().isEmpty()){
-                    unProducto.setPesoBulto(0);
-                }
-                else{
-                    unProducto.setPesoBulto(Integer.parseInt(pesoBulto.getText().toString()));
-                }
-                if (precioBulto.getText()==null||precioBulto.getText().toString().isEmpty()){
-                    control=control+1;
-                    inputPrecioBulto.setError("Debe ingresar un precio por bulto");
-                }
-                else{
-                    unProducto.setPrecioBulto(Double.parseDouble(precioBulto.getText().toString()));
-                }
-                if (listaFotos.size()<1){
-                    unProducto.setFotos(new ArrayList<String>());
-                }
-                else{
-                    unProducto.setFotos(listaFotos);
-                }
-
-                //comprobaciones vendedor
-
-                if (stringFotoVendedor==null||stringFotoVendedor.isEmpty()){
-                    stringFotoVendedor="SinFoto";
-                }
-                else{
-                    unVendedor.setFotoVendedor(stringFotoVendedor);
-                }
-                if (mailVendedor.getText()==null||mailVendedor.getText().toString().isEmpty()){
-                    inputMailVendedor.setError("Debe ingresar un mail para el vendedor");
-                }
-                else {
-                    unVendedor.setMailVendedor(mailVendedor.getText().toString());
-                }
-                if (nombreVendedor.getText()==null || nombreVendedor.getText().toString().isEmpty()){
-                    inputNombreVendedor.setError("Debe ingresar un vendedor");
-                    control=control+1;
-                }
-                else {
-                    unVendedor.setNombreVendedor(nombreVendedor.getText().toString());
-                }
-                if (telefonoVendedor.getText()==null||telefonoVendedor.getText().toString().isEmpty()){
-                    unVendedor.setTelefonoVendedor("n/a");
-                }
-                else {
-                    unVendedor.setTelefonoVendedor(telefonoVendedor.getText().toString());
-                }
-
-                //chequeo si hubo errores
+                fabMenuCargaProductos.close(true);
+                cargarDatos();
                 if (control>0){
-
                 }
                 else{
-                    daoVendedorDatabase.addVendedor(unVendedor);
-                    daoProductosDatabase.agregarProducto(unProducto);
-                    daoVendProdDatabase.agregarProductoVendedor(unProducto, unVendedor);
-                    daoImagenesDatabase.agregarFotosVarias(unProducto.getFotos(),unProducto);
+                volverAMain();
                 }
+            }
+            
+        });
 
+        agregarProducto = new FloatingActionButton(getActivity());
+        agregarProducto.setButtonSize(FloatingActionButton.SIZE_MINI);
+        agregarProducto.setLabelText(getString(R.string.nuevoProducto));
+        agregarProducto.setImageResource(R.drawable.ic_add_shopping_cart_black_24dp);
+        fabMenuCargaProductos.addMenuButton(agregarProducto);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            agregarProducto.setLabelColors(ContextCompat.getColor(getActivity(), R.color.rojoOscuro),
+                    ContextCompat.getColor(getActivity(), R.color.light_grey),
+                    ContextCompat.getColor(getActivity(), R.color.white_transparent));
+            agregarProducto.setLabelTextColor(ContextCompat.getColor(getActivity(), R.color.black));
+        }
+        else {
+            agregarProducto.setLabelColors(getResources().getColor(R.color.rojoOscuro),
+                    getResources().getColor(R.color.light_grey),
+                    getResources().getColor(R.color.white_transparent));
+            agregarProducto.setLabelTextColor(getResources().getColor( R.color.black));
+        }
+
+
+
+        agregarProducto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fabMenuCargaProductos.close(true);
+                cargarDatos();
+                if (control>0){}
+                else{
+                    borrarProducto();
+                }
 
             }
+
         });
 
 
+        agregarVendedor = new FloatingActionButton(getActivity());
+        agregarVendedor.setButtonSize(FloatingActionButton.SIZE_MINI);
+        agregarVendedor.setLabelText(getString(R.string.agregarVendedor));
+        agregarVendedor.setImageResource(R.drawable.ic_person_add_black_24dp);
+        fabMenuCargaProductos.addMenuButton(agregarVendedor);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            agregarVendedor.setLabelColors(ContextCompat.getColor(getActivity(), R.color.rojoOscuro),
+                    ContextCompat.getColor(getActivity(), R.color.light_grey),
+                    ContextCompat.getColor(getActivity(), R.color.white_transparent));
+            agregarVendedor.setLabelTextColor(ContextCompat.getColor(getActivity(), R.color.black));
+        }
+        else {
+            agregarVendedor.setLabelColors(getResources().getColor(R.color.rojoOscuro),
+                    getResources().getColor(R.color.light_grey),
+                    getResources().getColor(R.color.white_transparent));
+            agregarVendedor.setLabelTextColor(getResources().getColor( R.color.black));
+        }
+
+
+
+        agregarVendedor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fabMenuCargaProductos.close(true);
+                cargarDatos();
+                if (control > 0) {
+                } else {
+                    borrarTodo();
+                }
+            }
+
+        });
+
+
+        salir = new FloatingActionButton(getActivity());
+        salir.setButtonSize(FloatingActionButton.SIZE_MINI);
+        salir.setLabelText(getString(R.string.salir));
+        salir.setImageResource(R.drawable.ic_exit_to_app_black_24dp);
+        fabMenuCargaProductos.addMenuButton(salir);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            salir.setColorNormal(ContextCompat.getColor(getActivity(), R.color.Amarillo));
+            salir.setLabelColors(ContextCompat.getColor(getActivity(), R.color.Amarillo),
+                    ContextCompat.getColor(getActivity(), R.color.light_grey),
+                    ContextCompat.getColor(getActivity(), R.color.white_transparent));
+            salir.setLabelTextColor(ContextCompat.getColor(getActivity(), R.color.black));
+        }
+        else {
+            salir.setColorNormal(getResources().getColor(R.color.Amarillo));
+            salir.setLabelColors(getResources().getColor(R.color.Amarillo),
+                    getResources().getColor(R.color.light_grey),
+                    getResources().getColor(R.color.white_transparent));
+            salir.setLabelTextColor(getResources().getColor( R.color.black));
+        }
+
+
+
+        salir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                volverAMain();
+            }
+
+        });
 
         return view;
+    }
+
+    private void avisarFaltanDatos() {
+        Toast.makeText(getContext(), "Error, revise los datos cargados.", Toast.LENGTH_SHORT).show();
+    }
+
+    public void cargarDatos(){
+        //controlar los input layout
+        //cargar los datos
+        Producto unProducto = new Producto();
+        Vendedor unVendedor= new Vendedor();
+        control=0;
+
+        unProducto.setIdProducto("PRODUCTO-" + UUID.randomUUID().toString());
+        unVendedor.setIdVendedor("VENDEDOR-"+UUID.randomUUID().toString());
+
+        //comprobaciones producto
+        if (altoBulto.getText()==null||altoBulto.getText().toString().isEmpty()){
+            unProducto.setAltoBulto(0);
+        }
+        else {
+            unProducto.setAltoBulto(Integer.parseInt(altoBulto.getText().toString()));
+        }
+
+        if (anchoBulto.getText()==null || anchoBulto.getText().toString().isEmpty()){
+            unProducto.setAnchoBulto(0);
+        }
+        else{
+            unProducto.setAnchoBulto(Integer.parseInt(anchoBulto.getText().toString()));
+        }
+        if (profundidadBulto.getText()==null||profundidadBulto.getText().toString().isEmpty()){
+            unProducto.setProfundidadBulto(0);
+        }
+        else{
+            unProducto.setProfundidadBulto(Integer.parseInt(profundidadBulto.getText().toString()));
+        }
+        if (cantidadBulto.getText()==null||cantidadBulto.getText().toString().isEmpty()){
+            unProducto.setCantidadBulto(0);
+        }
+        else{
+            unProducto.setCantidadBulto(Integer.parseInt(cantidadBulto.getText().toString()));
+        }
+        if (nombreProducto.getText()==null||nombreProducto.getText().toString().isEmpty()){
+            control=control+1;
+            inputNombreProducto.setError("Debe ingresar un nombre de producto");
+
+        }
+        else{
+            unProducto.setNombreProducto(nombreProducto.getText().toString());
+        }
+
+
+        if (divisa.getText()==null||divisa.getText().toString().isEmpty()){
+            unProducto.setMonedaBulto("USD");
+        }
+        else{
+            unProducto.setMonedaBulto(divisa.getText().toString());
+        }
+        if (pesoBulto.getText()==null || pesoBulto.getText().toString().isEmpty()){
+            unProducto.setPesoBulto(0);
+        }
+        else{
+            unProducto.setPesoBulto(Integer.parseInt(pesoBulto.getText().toString()));
+        }
+        if (precioBulto.getText()==null||precioBulto.getText().toString().isEmpty()){
+            control=control+1;
+            inputPrecioBulto.setError("Debe ingresar un precio por bulto");
+        }
+        else{
+            unProducto.setPrecioBulto(Double.parseDouble(precioBulto.getText().toString()));
+        }
+        if (listaFotos.size()<1){
+            unProducto.setFotos(new RealmList<Foto>());
+        }
+        else{
+            unProducto.setFotos(listaFotos);
+        }
+
+        //comprobaciones vendedor
+
+        if (stringFotoVendedor==null||stringFotoVendedor.isEmpty()){
+            stringFotoVendedor="SinFoto";
+        }
+        else{
+            unVendedor.setFotoVendedor(stringFotoVendedor);
+        }
+        if (mailVendedor.getText()==null||mailVendedor.getText().toString().isEmpty()){
+            inputMailVendedor.setError("Debe ingresar un mail para el vendedor");
+        }
+        else {
+            unVendedor.setMailVendedor(mailVendedor.getText().toString());
+        }
+        if (nombreVendedor.getText()==null || nombreVendedor.getText().toString().isEmpty()){
+            inputNombreVendedor.setError("Debe ingresar un vendedor");
+            control=control+1;
+        }
+        else {
+            unVendedor.setNombreVendedor(nombreVendedor.getText().toString());
+        }
+        if (telefonoVendedor.getText()==null||telefonoVendedor.getText().toString().isEmpty()){
+            unVendedor.setTelefonoVendedor("n/a");
+        }
+        else {
+            unVendedor.setTelefonoVendedor(telefonoVendedor.getText().toString());
+        }
+
+        //chequeo si hubo errores
+        if (control>0){
+          avisarFaltanDatos();
+        }
+        else{
+            Orden unaOrden=new Orden();
+            unaOrden.setProducto(unProducto);
+            unaOrden.setVendedor(unVendedor);
+            unaOrden.setId("orden-"+UUID.randomUUID());
+            // Obtain a Realm instance
+            Realm realm = Realm.getDefaultInstance();
+
+            realm.beginTransaction();
+
+            Orden realmOrden = realm.copyToRealm(unaOrden);
+            realm.commitTransaction();
+            
+
+        }
+
+
+    }
+    public void volverAMain(){
+        Intent unIntent= new Intent(getActivity(), MainActivity.class);
+        getActivity().finish();
     }
 
 
@@ -324,8 +467,10 @@ public class FragmentCargarProducto extends Fragment implements AdapterView.OnIt
             public void onImagePicked(File imageFile, EasyImage.ImageSource source, int type) {
 
                 if (type==1){
-            listaFotos.add(imageFile.getAbsolutePath());
-            adapterFotos.notifyDataSetChanged();
+                    Foto unaFoto=new Foto();
+                    unaFoto.setFoto(imageFile.getAbsolutePath());
+                     listaFotos.add(unaFoto);
+                     adapterFotos.notifyDataSetChanged();
                 }
                 if (type==2){
 
@@ -358,6 +503,67 @@ public class FragmentCargarProducto extends Fragment implements AdapterView.OnIt
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+    
+    public void borrarTodo(){
+        nombreProducto.setText("");
+        cantidadBulto.setText("");
+        pesoBulto.setText("");
+        precioBulto.setText("");
+        divisa.setText("");
+        anchoBulto.setText("");
+        altoBulto.setText("");
+        profundidadBulto.setText("");
+        observacionesBulto.setText("");
+        nombreVendedor.setText("");
+        mailVendedor.setText("");
+        telefonoVendedor.setText("");
+        observacionVendedor.setText("");
+
+        inputNombreProducto.setError("");
+        inputCantidadBulto.setError("");
+        inputPesoBulto.setError("");
+        inputPrecioBulto.setError("");
+        inputDivisa.setError("");
+        inputAnchoBulto.setError("");
+        inputProfundidadBulto.setError("");
+        InputObservacionesBulto.setError("");
+        inputNombreVendedor.setError("");
+        inputMailVendedor.setError("");
+        inputTelefonoVendedor.setError("");
+        inputObservacionVendedor.setError("");
+        inputAltoBulto.setError("");
+
+        listaFotos=new RealmList<>();
+        adapterFotos.setListaFotosOriginales(listaFotos);
+        adapterFotos.notifyDataSetChanged();
+        fotoVendedor.setImageDrawable(null);
+        nombreProducto.requestFocus();
+    }
+    public void borrarProducto(){
+        nombreProducto.setText("");
+        cantidadBulto.setText("");
+        pesoBulto.setText("");
+        precioBulto.setText("");
+        divisa.setText("");
+        anchoBulto.setText("");
+        altoBulto.setText("");
+        profundidadBulto.setText("");
+        observacionesBulto.setText("");
+
+        inputNombreProducto.setError("");
+        inputCantidadBulto.setError("");
+        inputPesoBulto.setError("");
+        inputPrecioBulto.setError("");
+        inputDivisa.setError("");
+        inputAnchoBulto.setError("");
+        inputProfundidadBulto.setError("");
+        InputObservacionesBulto.setError("");
+
+        listaFotos=new RealmList<>();
+        adapterFotos.setListaFotosOriginales(listaFotos);
+        adapterFotos.notifyDataSetChanged();
+        nombreProducto.requestFocus();
     }
 }
 

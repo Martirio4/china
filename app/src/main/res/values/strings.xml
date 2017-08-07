@@ -25,6 +25,12 @@
     <string name="hintMailVendedor">Mail</string>
     <string name="hintDivisaBulto">Divisa</string>
     <string name="CargarOrden">Guardar y Salir</string>
+    <string name="btn_main_verOrden">Ver Productos</string>
+    <string name="btn_main_cargarOrden">Cargar nuevo Producto</string>
+    <string name="verProdTitulo">Productos Registrados</string>
+    <string name="agregarVendedor">Nuevo Vendedor</string>
+    <string name="nuevoProducto">Nuevo Producto</string>
+    <string name="salir">Volver</string>
 
     <string-array name="moneda">
         <item>¥ - CNY</item>

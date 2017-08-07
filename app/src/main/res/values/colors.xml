@@ -5,17 +5,23 @@
     <color name="colorAccent">#FF4081</color>
 
     <color name="fondoOscuro">#212121</color>
-    <color name="textoNegro">#212121</color>
-    <color name="textoAzul">#3f51b5</color>
-    <color name="textoClaro">#ffeb90</color>
-    <color name="amarillo">#ffb74d</color>
-    <color name="textoOscuro">#e53935</color>
-    <color name="marfil">#ffffff</color>
-    <color name="naranja">#ce8d0d</color>
-    <color name="paleta4">#1de9b6</color>
-    <color name="paleta5">#ce8d0d</color>
+
+
+
+
+    <color name="rojoClaro">#F44336</color>
+    <color name="rojoOscuro">#D32F2F</color>
+    <color name="rosita">#FFCDD2</color>
+    <color name="Amarillo">#ffc107</color>
+    <color name="texto">#212121</color>
+    <color name="textoClaro">#757575</color>
+    <color name="marfil">#FFFFFF</color>
+    <color name="divider">#BDBDBD</color>
 
     <color name="light_grey">#EEEEEE</color>
     <color name="white_transparent">#99FFFFFF</color>
     <color name="black">#000</color>
+
+
+
 </resources>

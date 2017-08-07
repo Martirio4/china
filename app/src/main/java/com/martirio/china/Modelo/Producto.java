@@ -2,13 +2,16 @@ package com.martirio.china.Modelo;
 
 import java.util.List;
 
+import io.realm.RealmList;
+import io.realm.RealmObject;
+
 /**
  * Created by Martirio on 01/08/2017.
  */
 
-public class Producto {
+public class Producto extends RealmObject {
     private String nombreProducto;
-    private List<String> fotos;
+    private RealmList<Foto>fotos;
     private String descripcion;
     private Integer pesoBulto;
     private Integer cantidadBulto;
@@ -56,11 +59,11 @@ public class Producto {
         this.nombreProducto = nombreProducto;
     }
 
-    public List<String> getFotos() {
+    public RealmList<Foto> getFotos() {
         return fotos;
     }
 
-    public void setFotos(List<String> fotos) {
+    public void setFotos(RealmList<Foto> fotos) {
         this.fotos = fotos;
     }
 

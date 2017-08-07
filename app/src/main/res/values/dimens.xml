@@ -14,4 +14,7 @@
     <dimen name="altoRecycler">212dp</dimen>
     <dimen name="anchoLayoutCargarProducto">314dp</dimen>
     <dimen name="altoLayoutaCargarProducto">214dp</dimen>
+    <dimen name="margenGrande">16dp</dimen>
+    <dimen name="altoLayoutVerProducto">100dp</dimen>
+    <dimen name="altoTarjetaVerProducto">94dp</dimen>
 </resources>

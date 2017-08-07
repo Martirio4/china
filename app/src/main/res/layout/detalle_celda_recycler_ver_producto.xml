@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/fondoOscuro"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/altoLayoutVerProducto"
+        android:background="@color/fondoOscuro"
+        android:layout_gravity="center_vertical">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/altoTarjetaVerProducto"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:background="@color/fondoOscuro"
+            android:elevation="@dimen/elevacionTarjetaCargaProducto">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/img_detalle_orden"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="3dp"
+                    android:background="@color/fondoOscuro"
+                    android:src="@drawable/bambi" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="15"
+                        android:text="@string/hintDescripcion"
+                        android:textSize="10sp" />
+
+                    <TextView
+                        android:id="@+id/text_producto_orden"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="40"
+                        android:gravity="center"
+                        android:maxLines="1"
+                         />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="15"
+                        android:text="@string/hintNombreVendedor"
+                        android:textSize="10sp" />
+
+                    <TextView
+                        android:id="@+id/text_vendedor_orden"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="40"
+                        android:gravity="center"
+                        android:maxLines="1"
+                         />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_detalle_producto"
+            android:layout_gravity="end|center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        </android.support.v7.widget.CardView>
+
+    </RelativeLayout>
+
+</LinearLayout>

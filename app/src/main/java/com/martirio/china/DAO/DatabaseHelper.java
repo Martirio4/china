@@ -47,7 +47,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 DAOVendedorDatabase.MAILVENDEDOR + " TEXT, " +
                 DAOVendedorDatabase.TELEFONOVENDEDOR + " TEXT, " +
                 DAOVendedorDatabase.FOTOVENDEDOR + " TEXT, " +
-                DAOVendedorDatabase.IDVENDEDOR + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                DAOVendedorDatabase.IDVENDEDOR + " TEXT PRIMARY KEY, " +
                 DAOVendedorDatabase.OBSERVACIONVENDEDOR + " TEXT )";
         db.execSQL(query2);
 

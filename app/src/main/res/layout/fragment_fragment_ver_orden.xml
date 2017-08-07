@@ -1,0 +1,31 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/fondoOscuro"
+    android:layout_height="match_parent"
+    tools:context="com.martirio.china.Fragments.Fragment_verOrden">
+
+    <TextView
+        android:text="Productos Resgistrados"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_margin="@dimen/margenChico"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/Amarillo"
+        android:id="@+id/text_verProducto_titulo"
+        android:fontFamily="monospace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerVerProductos"
+        android:layout_below="@id/text_verProducto_titulo"
+        android:layout_marginBottom="10dp"
+        android:background="@color/fondoOscuro"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
+
+
+</RelativeLayout>

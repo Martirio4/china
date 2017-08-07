@@ -37,7 +37,7 @@ public class DAOProductosDatabase extends DatabaseHelper {
 
     public void agregarProducto(Producto unProducto){
 
-        if(!checkIfExist(unProducto.getIdProducto())) {
+
 
             SQLiteDatabase database = getWritableDatabase();
 
@@ -59,7 +59,7 @@ public class DAOProductosDatabase extends DatabaseHelper {
             database.insert(TABLE_PRODUCTOS, null, row);
 
             database.close();
-        }
+
     }
 
     public void addProductosVarios(List<Producto> formatosList){
@@ -103,12 +103,11 @@ public class DAOProductosDatabase extends DatabaseHelper {
     }
 
 
-        public Producto getProducto(String idProducto){
+    public Producto getProducto(String idProducto){
 
         SQLiteDatabase database = getReadableDatabase();
 
-        String query = "SELECT * FROM " + TABLE_PRODUCTOS +
-                        " WHERE IDPRODUCTO=" + idProducto;
+        String query = "SELECT * FROM " + TABLE_PRODUCTOS + " WHERE IDPRODUCTO=" + idProducto;
 
         Cursor cursor = database.rawQuery(query, null);
         Producto unProducto = null;
@@ -136,11 +135,7 @@ public class DAOProductosDatabase extends DatabaseHelper {
         database.close();
 
         return unProducto;
-    }
+}
 
-    public Boolean checkIfExist(String idProducto){
-        Producto unProducto = getProducto(idProducto);
-        return !(unProducto == null);
-    }
 
 }

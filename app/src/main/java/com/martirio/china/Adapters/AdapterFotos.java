@@ -14,11 +14,15 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.martirio.china.Modelo.Foto;
 import com.martirio.china.R;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.util.List;
+
+import io.realm.Realm;
+import io.realm.RealmList;
 
 /**
  * Created by elmar on 18/5/2017.
@@ -27,8 +31,8 @@ import java.util.List;
 public class AdapterFotos extends RecyclerView.Adapter implements View.OnClickListener, View.OnLongClickListener {
 
     private Context context;
-    private List<String> listaStringsOriginales;
-    private List<String> listaStringsFavoritos;
+    private RealmList<Foto> listaFotosOriginales;
+    private RealmList<Foto> listaFotosFavoritos;
     private View.OnClickListener listener;
     private AdapterView.OnLongClickListener listenerLong;
     private Favoritable favoritable;
@@ -45,17 +49,17 @@ public class AdapterFotos extends RecyclerView.Adapter implements View.OnClickLi
         this.context = context;
     }
 
-    public void setListaStringsOriginales(List<String> listaStringsOriginales) {
-        this.listaStringsOriginales = listaStringsOriginales;
+    public void setListaFotosOriginales(RealmList<Foto> listaFotosOriginales) {
+        this.listaFotosOriginales = listaFotosOriginales;
     }
 
-    public void addListaStringsOriginales(List<String> listaStringsOriginales) {
-        this.listaStringsOriginales.addAll(listaStringsOriginales);
+    public void addListaFotosOriginales(RealmList<Foto> listaFotosOriginales) {
+        this.listaFotosOriginales.addAll(listaFotosOriginales);
     }
 
 
-    public List<String> getListaStringsOriginales() {
-        return listaStringsOriginales;
+    public RealmList<Foto> getListaFotosOriginales() {
+        return listaFotosOriginales;
     }
 
     //crear vista y viewholder
@@ -67,7 +71,7 @@ public class AdapterFotos extends RecyclerView.Adapter implements View.OnClickLi
         FragmentManager fragmentManager = (FragmentManager) unaActivity.getSupportFragmentManager();
         viewCelda = layoutInflater.inflate(R.layout.detalle_celda_recycler_cargar_producto, parent, false);
 
-        StringViewHolder peliculasViewHolder = new StringViewHolder(viewCelda);
+        FotoViewHolder peliculasViewHolder = new FotoViewHolder(viewCelda);
         viewCelda.setOnClickListener(this);
 
         return peliculasViewHolder;
@@ -75,16 +79,16 @@ public class AdapterFotos extends RecyclerView.Adapter implements View.OnClickLi
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        final String unString = listaStringsOriginales.get(position);
-        StringViewHolder StringViewHolder = (StringViewHolder) holder;
-        StringViewHolder.cargarString(unString);
+        final Foto unFoto = listaFotosOriginales.get(position);
+        FotoViewHolder FotoViewHolder = (FotoViewHolder) holder;
+        FotoViewHolder.cargarFoto(unFoto);
 
 
     }
 
     @Override
     public int getItemCount() {
-        return listaStringsOriginales.size();
+        return listaFotosOriginales.size();
     }
 
     @Override
@@ -101,19 +105,19 @@ public class AdapterFotos extends RecyclerView.Adapter implements View.OnClickLi
     //creo el viewholder que mantiene las referencias
     //de los elementos de la celda
 
-    private static class StringViewHolder extends RecyclerView.ViewHolder {
+    private static class FotoViewHolder extends RecyclerView.ViewHolder {
         private ImageView imageView;
         //private TextView textViewTitulo;
 
 
-        public StringViewHolder(View itemView) {
+        public FotoViewHolder(View itemView) {
             super(itemView);
             imageView = (ImageView) itemView.findViewById(R.id.imagenCamara);
         }
 
-        public void cargarString(String unString) {
+        public void cargarFoto(Foto unFoto) {
 
-            File f =new File(unString);
+            File f =new File(unFoto.getFoto());
 
             Picasso.with(imageView.getContext())
                     .load(f)
@@ -125,6 +129,6 @@ public class AdapterFotos extends RecyclerView.Adapter implements View.OnClickLi
     }
 
     public interface Favoritable {
-        public void recibirStringFavorito(String unString);
+        public void recibirFotoFavorito(Foto unFoto);
     }
 }

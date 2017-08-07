@@ -2,18 +2,23 @@ package com.martirio.china.Modelo;
 
 import java.util.List;
 
+import io.realm.RealmList;
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+
 /**
  * Created by Martirio on 01/08/2017.
  */
 
-public class Vendedor {
+public class Vendedor extends RealmObject {
     private String nombreVendedor;
     private String mailVendedor;
+
     private String idVendedor;
     private String telefonoVendedor;
     private String fotoVendedor;
     private String observacionVendedor;
-    private List<Producto> listaProductosVendedor;
+    private RealmList<Producto> listaProductosVendedor;
 
     public String getIdVendedor() {
         return idVendedor;
@@ -66,11 +71,11 @@ public class Vendedor {
         this.observacionVendedor = observacionVendedor;
     }
 
-    public List<Producto> getListaProductosVendedor() {
+    public RealmList<Producto> getListaProductosVendedor() {
         return listaProductosVendedor;
     }
 
-    public void setListaProductosVendedor(List<Producto> listaProductosVendedor) {
+    public void setListaProductosVendedor(RealmList<Producto> listaProductosVendedor) {
         this.listaProductosVendedor = listaProductosVendedor;
     }
 }

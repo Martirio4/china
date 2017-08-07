@@ -21,5 +21,14 @@
         <item name="fab_colorNormal">@color/colorPrimary</item>
         <item name="fab_colorPressed">@color/colorPrimaryDark</item> </style>
 
+    <style name="Dialog" parent="android:style/Theme.Dialog">
+        <item name="android:windowBackground">@color/fondoOscuro</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/Amarillo</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+
+    </style>
+
 
 </resources>
